@@ -13,6 +13,7 @@ namespace Catalog.API.Products.GetProductById
         public async Task<GetProductByIdResult> Handle(GetProductByIdQuery query, CancellationToken cancellationToken)
         {
             logger.LogInformation($"Querying product by id: {query.Id}");
+
             var result = await documentSession.LoadAsync<Product>(query.Id,cancellationToken);
             if (result is null)
                 throw new ProductNotFoundException();
